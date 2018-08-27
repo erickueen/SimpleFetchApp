@@ -9,8 +9,11 @@ class SimpleFetcher
 
         fetcher = DataFetcher.new(id: args[:id], host: args[:host])
         total_invoices = fetcher.get_invoice_count(args[:start],args[:finish],0)
-        p "Amount of invoices found: #{total_invoices}"
-        p "Number of calls: #{fetcher.calls}"
+        if(total_invoices)
+            p "Amount of invoices found: #{total_invoices}"
+            p "Number of calls: #{fetcher.calls}"   
+        else
+            p "Please check your parameters"
+        end
     end
-
 end

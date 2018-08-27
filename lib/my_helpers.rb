@@ -13,7 +13,7 @@ module MyHelpers
             return date
         end
         date = Date.parse(date)
-        rescue ArgumentError
+        rescue ArgumentError, TypeError
             return nil
         return date        
     end
