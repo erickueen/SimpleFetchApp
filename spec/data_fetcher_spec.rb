@@ -22,7 +22,7 @@ RSpec.describe DataFetcher do
 
     describe '#get_invoice_count' do
 
-        it 'returns a number if host respond a valid ammount' do
+        it 'returns a number if host respond a valid amount' do
             fetcher = described_class.new(host: 'http://host/')
             stub_request(:get, "http://host/?finish=2017-01-01&id=&start=2017-01-01").
                 with(
@@ -54,7 +54,7 @@ RSpec.describe DataFetcher do
             expect(response).to be(-1)
         end
 
-        it 'calls itself with splitted range when host respond a large ammount' do
+        it 'calls itself with splitted range when host respond a large amount' do
             fetcher = described_class.new(host: 'http://host/')
             stub_request(:get, "http://host/?finish=2017-03-31&id=&start=2017-01-01").
                 with(

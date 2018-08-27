@@ -2,8 +2,8 @@ require 'net/http'
 require 'date'
 require_relative 'my_helpers'
 
-# This class connects to a service to fetch an ammount of
-# invoices between dates and saves the ammount of calls 
+# This class connects to a service to fetch an amount of
+# invoices between dates and saves the amount of calls 
 # made to the host. The get_invoice_count method allow
 # us to fetch recursively if the range is too big
 class DataFetcher include MyHelpers
@@ -14,19 +14,19 @@ class DataFetcher include MyHelpers
     # Configure host if given and the ID to fetch from host.
     # Initialize calls at 0
     def initialize(params = {})
-        @host = params.fetch(:host,'http://34.209.24.195/facturas')
+        @host = params.fetch(:host) || 'http://34.209.24.195/facturas'
         @id = params.fetch(:id,'')
         @calls=0
     end
 
-    # Given a date range, it fetchs an invoice count, if the ammount is too big, it
+    # Given a date range, it fetchs an invoice count, if the amount is too big, it
     # calls itself with a smaller range.
-    # Returns the ammount of invoices if there was no errors, -1 if there was
+    # Returns the amount of invoices if there was no errors, -1 if there was
     # a bad request or nil if there was an error.
     # Params: 
     # +start_date+:: Initial date of range
     # +finish_date+:: End date of range
-    # +count+:: Previous ammount of invoices
+    # +count+:: Previous amount of invoices
     def get_invoice_count(start_date,finish_date,count)
         start_date = parse_date(start_date)
         finish_date = parse_date(finish_date)
