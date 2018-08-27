@@ -1,0 +1,40 @@
+#!/usr/bin/env ruby
+$LOAD_PATH << 'lib'
+require 'simple_fetcher'
+
+USAGE = <<ENDUSAGE
+Usage:
+   simplefetcher [-h] [-start 'YYYY/DD/MM'] [-finish 'YYYY/DD/MM'] [-id 'host-id'] [-host 'Service Host']
+ENDUSAGE
+
+
+HELP = <<ENDHELP
+   -h, --help       Show this help.
+   -start           Start date range to fetch from service.
+   -finish          End of date range to fetch from service.
+   -id              ID to acces the service.
+   -host            (optional) provide a custom host.
+ENDHELP
+
+ARGS = {}
+ARGV.each_with_index do |arg,index|
+    case arg
+      when '-h','--help'    then ARGS[:help]    = true
+      when '-start'         then ARGS[:start]   = ARGV[index+1]
+      when '-finish'        then ARGS[:finish]  = ARGV[index+1]
+      when '-id'            then ARGS[:id]      = ARGV[index+1]
+      when '-host'          then ARGS[:host]    = ARGV[index+1]
+  end
+end
+
+
+if ARGS[:help] or !ARGS[:start] or !ARGS[:finish] or !ARGS[:id]
+    puts USAGE
+    puts HELP if ARGS[:help]
+    exit
+else
+    SimpleFetcher.run(ARGS)
+end
+
+
+
